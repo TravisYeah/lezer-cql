@@ -2,3 +2,4 @@
 /src/parser.*
 /dist
 .cache
+cql2.grammar

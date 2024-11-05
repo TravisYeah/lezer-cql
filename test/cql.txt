@@ -1,0 +1,64 @@
+# FALSE
+
+FALSE
+
+==>
+
+BooleanExpression(BooleanLiteral(False))
+
+# false
+
+false
+
+==>
+
+BooleanExpression(BooleanLiteral(False))
+
+# TRUE
+
+TRUE
+
+==>
+
+BooleanExpression(BooleanLiteral(True))
+
+# true 
+
+true
+
+==>
+
+BooleanExpression(BooleanLiteral(True))
+
+# and
+
+TRUE and FALSE
+
+==>
+
+BooleanExpression(BooleanAnd(BooleanLiteral(True), BooleanLiteral(False)))
+
+# or
+
+TRUE or FALSE
+
+==>
+
+BooleanExpression(BooleanOr(BooleanLiteral(True), BooleanLiteral(False)))
+
+# and or
+
+TRUE and FALSE or TRUE
+
+==>
+
+BooleanExpression(BooleanOr(BooleanAnd(BooleanLiteral(True), BooleanLiteral(False)), BooleanLiteral(True)))
+
+# or and
+
+TRUE or FALSE and TRUE
+
+==>
+
+BooleanExpression(BooleanOr(BooleanLiteral(True), BooleanAnd(BooleanLiteral(False), BooleanLiteral(True))))
+

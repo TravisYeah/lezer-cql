@@ -1,11 +1,30 @@
-@top BooleanExpression { (BooleanLiteral)+ }
+@top BooleanExpression { booleanTerm }
 
-@skip { space }
+booleanTerm {
+	BooleanLiteral |
+	BooleanAnd |
+	BooleanOr
+}
+
+BooleanAnd {
+	booleanTerm !and "and" booleanTerm
+}
+
+BooleanOr {
+	booleanTerm !or "or" booleanTerm
+}
 
 BooleanLiteral { True | False }
 
 True { "TRUE" | "true" }
 False { "FALSE" | "false" }
+
+@skip { space }
+
+@precedence {
+  and @left
+  or @left
+}
 
 @tokens {
   space { @whitespace+ }
