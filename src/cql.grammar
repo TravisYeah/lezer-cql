@@ -25,8 +25,17 @@ BinaryComparisonPredicate {
 }
 
 scalarExpression {
+	characterClause |
 	BooleanLiteral
 }
+
+characterClause {
+	CharacterLiteral
+}
+
+CharacterLiteral { "'" character* "'" }
+
+character { alpha | digit | characterWhitespace | escapeQuote }
 
 ComparisonOperator {
 	Eq |
@@ -54,20 +63,67 @@ BooleanLiteral { True | False }
 True { "TRUE" | "true" }
 False { "FALSE" | "false" }
 
-@skip { space }
-
 @precedence {
   and @left
   or @left
 }
 
 @tokens {
-  space { @whitespace+ }
+	alpha {
+		$[\u{0007}-\u{0008}] |
+		$[\u{0021}-\u{0026}] |
+		$[\u{0028}-\u{002F}] |
+		$[\u{003A}-\u{0084}] |
+		$[\u{0086}-\u{009F}] |
+		$[\u{00A1}-\u{167F}] |
+		$[\u{1681}-\u{1FFF}] |
+		$[\u{200B}-\u{2027}] |
+		$[\u{202A}-\u{202E}] |
+		$[\u{2030}-\u{205E}] |
+		$[\u{2060}-\u{2FFF}] |
+		$[\u{3001}-\u{D7FF}] |
+		$[\u{E000}-\u{FFFD}] |
+		$[\u{10000}-\u{10FFFF}] 
+	}
+	digit { $[\u{0030}-\u{0039}] }
+	characterWhitespace {
+		$[\u{0009}] |
+		$[\u{000A}] |
+		$[\u{000B}] |
+		$[\u{000C}] |
+		$[\u{000D}] |
+		$[\u{0020}] |
+		$[\u{0085}] |
+		$[\u{00A0}] |
+		$[\u{1680}] |
+		$[\u{2000}] |
+		$[\u{2001}] |
+		$[\u{2002}] |
+		$[\u{2003}] |
+		$[\u{2004}] |
+		$[\u{2005}] |
+		$[\u{2006}] |
+		$[\u{2007}] |
+		$[\u{2008}] |
+		$[\u{2009}] |
+		$[\u{200A}] |
+		$[\u{2028}] |
+		$[\u{2029}] |
+		$[\u{202F}] |
+		$[\u{205F}] |
+		$[\u{3000}]
+	}
+	escapeQuote { "''" | "\\'" }
 	Eq { "=" }
 	Neq { "<" ">" }
 	Le { "<" }
 	Gt { ">" }
 	Leq { "<" "=" }
 	Gte { ">" "=" }
+  space { @whitespace+ }
+
+	@precedence { space, characterWhitespace }
 }
+
+@skip { space }
 

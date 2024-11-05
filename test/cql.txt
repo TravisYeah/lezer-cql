@@ -70,11 +70,19 @@ not true
 
 BooleanExpression(NegatedBooleanTerm(BooleanLiteral(True)))
 
-# BinaryComparisonPredicate
+# BinaryComparisonPredicate boolean literals
 
 true = true
 
 ==>
 
 BooleanExpression(BinaryComparisonPredicate(BooleanLiteral(True), ComparisonOperator(Eq), BooleanLiteral(True)))
+
+# BinaryComparisonPredicate character clause
+
+'test' = 'a b '' \\' 1 c'
+
+==>
+
+BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), CharacterLiteral))
 
