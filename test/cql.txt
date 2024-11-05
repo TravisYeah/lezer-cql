@@ -62,3 +62,11 @@ TRUE or FALSE and TRUE
 
 BooleanExpression(BooleanOr(BooleanLiteral(True), BooleanAnd(BooleanLiteral(False), BooleanLiteral(True))))
 
+# not true 
+
+not true
+
+==>
+
+BooleanExpression(NegatedBooleanTerm(BooleanLiteral(True)))
+

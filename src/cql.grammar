@@ -3,7 +3,12 @@
 booleanTerm {
 	BooleanLiteral |
 	BooleanAnd |
-	BooleanOr
+	BooleanOr |
+	NegatedBooleanTerm
+}
+
+NegatedBooleanTerm {
+	"not" booleanTerm
 }
 
 BooleanAnd {
