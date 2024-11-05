@@ -1,0 +1,13 @@
+@top BooleanExpression { (BooleanLiteral)+ }
+
+@skip { space }
+
+BooleanLiteral { True | False }
+
+True { "TRUE" | "true" }
+False { "FALSE" | "false" }
+
+@tokens {
+  space { @whitespace+ }
+}
+
