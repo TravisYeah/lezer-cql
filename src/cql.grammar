@@ -30,8 +30,12 @@ scalarExpression {
 }
 
 characterClause {
+	"CASEI" "(" characterExpression ")" |
+	"ACCENTI" "(" characterExpression ")" |
 	CharacterLiteral
 }
+
+characterExpression { characterClause }
 
 CharacterLiteral { "'" character* "'" }
 

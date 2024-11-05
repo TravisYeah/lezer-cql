@@ -86,3 +86,11 @@ BooleanExpression(BinaryComparisonPredicate(BooleanLiteral(True), ComparisonOper
 
 BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), CharacterLiteral))
 
+# BinaryComparisonPredicate character clause casei
+
+'test' = CASEI('test')
+
+==>
+
+BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), CharacterLiteral))
+
