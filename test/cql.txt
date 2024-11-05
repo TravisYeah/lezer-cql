@@ -70,3 +70,11 @@ not true
 
 BooleanExpression(NegatedBooleanTerm(BooleanLiteral(True)))
 
+# BinaryComparisonPredicate
+
+true = true
+
+==>
+
+BooleanExpression(BinaryComparisonPredicate(BooleanLiteral(True), ComparisonOperator(Eq), BooleanLiteral(True)))
+
