@@ -29,13 +29,28 @@ scalarExpression {
 	BooleanLiteral
 }
 
+PropertyName {
+	identifier |
+	"\"" identifier "\""
+}
+
+identifier { identifierStart identifierPart* }
+
 characterClause {
-	"CASEI" "(" characterExpression ")" |
-	"ACCENTI" "(" characterExpression ")" |
+	Casei |
+	Accenti |
 	CharacterLiteral
 }
 
-characterExpression { characterClause }
+Casei {
+	"CASEI" "(" CharacterExpression ")"
+}
+
+Accenti {
+	"Accenti" "(" CharacterExpression ")"
+}
+
+CharacterExpression { characterClause | PropertyName }
 
 CharacterLiteral { "'" character* "'" }
 
@@ -117,6 +132,31 @@ False { "FALSE" | "false" }
 		$[\u{205F}] |
 		$[\u{3000}]
 	}
+	identifierStart {
+		$[\u003A] |
+		$[\u005F] |
+		$[\u{0041}-\u{005A}] |
+		$[\u{0061}-\u{007A}] |
+		$[\u{00C0}-\u{00D6}] |
+		$[\u{00D8}-\u{00F6}] |
+		$[\u{00F8}-\u{02FF}] |
+		$[\u{0370}-\u{037D}] |
+		$[\u{037F}-\u{1FFE}] |
+		$[\u{200C}-\u{200D}] |
+		$[\u{2070}-\u{218F}] |
+		$[\u{2C00}-\u{2FEF}] |
+		$[\u{3001}-\u{D7FF}] |
+		$[\u{F900}-\u{FDCF}] |
+		$[\u{FDF0}-\u{FFFD}] |
+		$[\u{10000}-\u{EFFFF}]
+	}
+	identifierPart {
+		identifierStart |
+		"." |
+		digit |
+		$[\u{0300}-\u{036F}] |
+		$[\u{203F}-\u{2040}]
+	}
 	escapeQuote { "''" | "\\'" }
 	Eq { "=" }
 	Neq { "<" ">" }
@@ -127,6 +167,7 @@ False { "FALSE" | "false" }
   space { @whitespace+ }
 
 	@precedence { space, characterWhitespace }
+	@precedence { space, identifierStart, identifierPart }
 }
 
 @skip { space }

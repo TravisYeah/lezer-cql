@@ -92,5 +92,21 @@ BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator
 
 ==>
 
-BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), CharacterLiteral))
+BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), Casei(CharacterExpression(CharacterLiteral))))
+
+# BinaryComparisonPredicate character clause property name
+
+'test' = CASEI(test)
+
+==>
+
+BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), Casei(CharacterExpression(PropertyName))))
+
+# BinaryComparisonPredicate character clause property name quoted
+
+'test' = CASEI("test")
+
+==>
+
+BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), Casei(CharacterExpression(PropertyName))))
 
