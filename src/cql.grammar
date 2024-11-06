@@ -11,7 +11,8 @@ primary {
 }
 
 predicate {
-	comparisonPredicate
+	comparisonPredicate |
+	spatialPredicate
 }
 
 comparisonPredicate {
@@ -21,6 +22,26 @@ comparisonPredicate {
 	IsInListPredicate |
 	IsNullPredicate
 }
+
+spatialPredicate { spatialFunction "(" geomExpression "," geomExpression ")" }
+
+spatialFunction {
+	kw<"S_INTERSECTS"> |
+	kw<"S_EQUALS"> |
+	kw<"S_DISJOINT"> |
+	kw<"S_TOUCHES"> |
+	kw<"S_WITHIN"> |
+	kw<"S_OVERLAPS"> |
+	kw<"S_CROSSES"> |
+	kw<"S_CONTAINS">
+}
+
+geomExpression {
+	spatialInstance |
+	PropertyName |
+	Function
+}
+
 
 IsNullPredicate { isNullOperand kw<"IS"> kw<"NOT">? kw<"NULL"> }
 

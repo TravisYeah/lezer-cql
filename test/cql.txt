@@ -245,3 +245,11 @@ POINT(0 1 2) IS NULL
 ==>
 
 BooleanExpression(IsNullPredicate("POINT", "IS", "NULL"))
+
+# spatial predicate
+
+S_EQUALS(a, b)
+
+==>
+
+BooleanExpression("S_EQUALS", PropertyName, PropertyName)
