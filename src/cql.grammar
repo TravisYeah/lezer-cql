@@ -12,7 +12,8 @@ primary {
 
 predicate {
 	comparisonPredicate |
-	spatialPredicate
+	spatialPredicate |
+	temporalPredicate
 }
 
 comparisonPredicate {
@@ -21,6 +22,32 @@ comparisonPredicate {
 	IsBetweenPredicate |
 	IsInListPredicate |
 	IsNullPredicate
+}
+
+temporalPredicate { temporalFunction "(" temporalExpression "," temporalExpression ")" }
+
+temporalExpression {
+	temporalInstance |
+	PropertyName |
+	Function
+}
+
+temporalFunction {
+	kw<"T_AFTER"> |
+	kw<"T_BEFORE"> |
+	kw<"T_CONTAINS"> |
+	kw<"T_DISJOINT"> |
+	kw<"T_DURING"> |
+	kw<"T_EQUALS"> |
+	kw<"T_FINISHEDBY"> |
+	kw<"T_FINISHES"> |
+	kw<"T_INTERSECTS"> |
+	kw<"T_MEETS"> |
+	kw<"T_METBY"> |
+	kw<"T_OVERLAPPEDBY"> |
+	kw<"T_OVERLAPS"> |
+	kw<"T_STARTEDBY"> |
+	kw<"T_STARTS">
 }
 
 spatialPredicate { spatialFunction "(" geomExpression "," geomExpression ")" }

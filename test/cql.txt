@@ -253,3 +253,11 @@ S_EQUALS(a, b)
 ==>
 
 BooleanExpression("S_EQUALS", PropertyName, PropertyName)
+
+# temporal predicate
+
+T_AFTER(a, b)
+
+==>
+
+BooleanExpression("T_AFTER", PropertyName, PropertyName)
