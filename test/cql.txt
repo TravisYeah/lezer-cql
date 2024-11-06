@@ -221,3 +221,27 @@ BooleanExpression(IsInListPredicate(NumericLiteral, "NOT", "IN", NumericLiteral,
 ==>
 
 BooleanExpression(IsNullPredicate(NumericLiteral, "IS", "NULL"))
+
+# is not null comparison
+
+1 IS NOT NULL
+
+==>
+
+BooleanExpression(IsNullPredicate(NumericLiteral, "IS", "NOT", "NULL"))
+
+# is null spatial
+
+POINT(0 1) IS NULL
+
+==>
+
+BooleanExpression(IsNullPredicate("POINT", "IS", "NULL"))
+
+# is null spatial 3D
+
+POINT(0 1 2) IS NULL
+
+==>
+
+BooleanExpression(IsNullPredicate("POINT", "IS", "NULL"))

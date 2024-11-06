@@ -22,7 +22,13 @@ comparisonPredicate {
 	IsNullPredicate
 }
 
-IsNullPredicate { arithmeticExpression kw<"IS"> kw<"NOT">? kw<"NULL"> }
+IsNullPredicate { isNullOperand kw<"IS"> kw<"NOT">? kw<"NULL"> }
+
+isNullOperand {
+	temporalInstance |
+	spatialInstance |
+	arithmeticExpression
+}
 
 IsInListPredicate { scalarExpression ~negated kw<"NOT">? kw<"IN"> "(" inList ")" }
 
@@ -125,25 +131,68 @@ arithmeticOperand {
 	Function
 }
 
-NumericLiteral { sign? unsignedNumericLiteral }
+spatialInstance {
+	geometryLiteral |
+	geometryCollectionTaggedText |
+	bboxTaggedText
+}
 
-unsignedNumericLiteral { decimalNumericLiteral | scientificNumericLiteral }
+geometryLiteral {
+	pointTaggedText |
+	linestringTaggedText |
+	polygonTaggedText |
+	multipointTaggedText |
+	multilinestringTaggedText |
+	multipolygonTaggedText
+}
 
-signedNumericLiteral { sign? unsignedNumericLiteral }
+pointTaggedText { kw<"POINT"> kw<"Z">? pointText }
 
-decimalNumericLiteral { unsignedInteger ( "." unsignedInteger? )? | "." unsignedInteger }
+linestringTaggedText { kw<"LINESTRING"> kw<"Z">? lineStringText }
 
-scientificNumericLiteral { mantissa kw<"E"> exponent }
+polygonTaggedText { kw<"POLYGON"> kw<"Z">? polygonText }
 
-mantissa { decimalNumericLiteral }
+multipointTaggedText { kw<"MULTIPOINT"> kw<"Z">? multiPointText }
 
-exponent { signedInteger }
+multilinestringTaggedText { kw<"MULTILINESTRING"> kw<"Z">? multiLineStringText }
 
-signedInteger { sign? unsignedInteger }
+multipolygonTaggedText { kw<"MULTIPOLYGON"> kw<"Z">? multiPolygonText }
 
-unsignedInteger { digit+ }
+geometryCollectionTaggedText { kw<"GEOMETRYCOLLECTION"> kw<"Z">? geometryCollectionText }
 
-sign { "+" | "-" }
+pointText { "(" point ")" }
+
+lineStringText { "(" point "," point ("," point)* ")" }
+
+linearRingText { kw<"EMPTY"> | "(" point "," point "," point "," point ("," point)* ")" }
+
+polygonText {  "(" linearRingText ("," linearRingText)* ")" }
+
+multiPointText { "(" pointText ("," pointText)* ")" }
+
+multiLineStringText { "(" lineStringText ("," lineStringText)* ")" }
+
+multiPolygonText { "(" polygonText ("," polygonText)* ")" }
+
+geometryCollectionText { "(" geometryLiteral ("," geometryLiteral)* ")" }
+
+bboxTaggedText { kw<"BBOX"> bboxText }
+
+bboxText { "(" westBoundLon "," southBoundLat "," (minElev ",")? eastBoundLon "," northBoundLat ("," maxElev)? ")" }
+
+westBoundLon { NumericLiteral }
+
+eastBoundLon { NumericLiteral }
+
+northBoundLat { NumericLiteral }
+
+southBoundLat { NumericLiteral }
+
+minElev { NumericLiteral }
+
+maxElev { NumericLiteral }
+
+temporalInstance { instantInstance | intervalInstance }
 
 instantInstance { DateInstant | TimestampInstant }
 
@@ -273,6 +322,34 @@ timeSecond { digit digit ("." digit digit*)? }
 	Leq { "<" "=" }
 	Gte { ">" "=" }
   space { @whitespace+ }
+
+	point { xCoord space yCoord (space zCoord)? }
+
+	xCoord { NumericLiteral }
+
+	yCoord { NumericLiteral }
+
+	zCoord { NumericLiteral }
+
+	NumericLiteral { sign? unsignedNumericLiteral }
+
+	unsignedNumericLiteral { decimalNumericLiteral | scientificNumericLiteral }
+
+	signedNumericLiteral { sign? unsignedNumericLiteral }
+
+	decimalNumericLiteral { unsignedInteger ( "." unsignedInteger? )? | "." unsignedInteger }
+
+	scientificNumericLiteral { mantissa "E" exponent }
+
+	mantissa { decimalNumericLiteral }
+
+	exponent { signedInteger }
+
+	signedInteger { sign? unsignedInteger }
+
+	unsignedInteger { digit+ }
+
+	sign { "+" | "-" }
 
 	@precedence { space, characterWhitespace }
 	@precedence { space, identifierStart, identifierPart, identifier }
