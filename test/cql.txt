@@ -190,3 +190,26 @@ BooleanExpression(IsLikePredicate(CharacterLiteral, "NOT", "LIKE", CharacterLite
 
 BooleanExpression(IsBetweenPredicate(NumericLiteral, "BETWEEN", NumericLiteral, "AND", NumericLiteral))
 
+# not between comparison
+
+1 NOT BETWEEN 2 AND 3
+
+==>
+
+BooleanExpression(IsBetweenPredicate(NumericLiteral, "NOT", "BETWEEN", NumericLiteral, "AND", NumericLiteral))
+
+# in comparison
+
+1 IN (2, 3)
+
+==>
+
+BooleanExpression(IsInListPredicate(NumericLiteral, "IN", NumericLiteral, NumericLiteral))
+
+# not in comparison
+
+1 NOT IN (2, 3)
+
+==>
+
+BooleanExpression(IsInListPredicate(NumericLiteral, "NOT", "IN", NumericLiteral, NumericLiteral))

@@ -17,11 +17,16 @@ predicate {
 comparisonPredicate {
 	BinaryComparisonPredicate |
 	IsLikePredicate |
-	IsBetweenPredicate
+	IsBetweenPredicate |
+	IsInListPredicate
 }
 
+IsInListPredicate { scalarExpression ~negated kw<"NOT">? kw<"IN"> "(" inList ")" }
+
+inList { scalarExpression ("," scalarExpression)* }
+
 IsBetweenPredicate {
-	arithmeticExpression kw<"BETWEEN"> arithmeticExpression kw<"AND"> arithmeticExpression
+	arithmeticExpression ~negated kw<"NOT">? kw<"BETWEEN"> arithmeticExpression kw<"AND"> arithmeticExpression
 }
 
 BinaryComparisonPredicate {
@@ -37,7 +42,7 @@ scalarExpression {
 	boolean
 }
 
-IsLikePredicate { characterExpression kw<"NOT">? kw<"LIKE"> patternExpression }
+IsLikePredicate { characterExpression ~negated kw<"NOT">? ~destructure kw<"LIKE"> patternExpression }
 
 patternExpression {
 	kw<"CASEI"> "(" patternExpression ")" |
