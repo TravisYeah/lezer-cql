@@ -76,7 +76,7 @@ true = true
 
 ==>
 
-BooleanExpression(BinaryComparisonPredicate(BooleanLiteral, ComparisonOperator(Eq), BooleanLiteral))
+BooleanExpression(BinaryComparisonPredicate(BooleanLiteral, Eq, BooleanLiteral))
 
 # BinaryComparisonPredicate character clause
 
@@ -84,7 +84,7 @@ BooleanExpression(BinaryComparisonPredicate(BooleanLiteral, ComparisonOperator(E
 
 ==>
 
-BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), CharacterLiteral))
+BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, Eq, CharacterLiteral))
 
 # BinaryComparisonPredicate character clause casei
 
@@ -92,7 +92,7 @@ BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator
 
 ==>
 
-BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), Casei("CASEI", CharacterLiteral)))
+BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, Eq, Casei("CASEI", CharacterLiteral)))
 
 # BinaryComparisonPredicate character clause property name
 
@@ -100,7 +100,7 @@ BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator
 
 ==>
 
-BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), Casei("CASEI", PropertyName)))
+BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, Eq, Casei("CASEI", PropertyName)))
 
 # BinaryComparisonPredicate character clause property name quoted
 
@@ -108,7 +108,7 @@ BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator
 
 ==>
 
-BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), Casei("CASEI", PropertyName)))
+BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, Eq, Casei("CASEI", PropertyName)))
 
 # BinaryComparisonPredicate casei function
 
@@ -116,7 +116,7 @@ BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator
 
 ==>
 
-BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), Casei("CASEI", Function(PropertyName))))
+BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, Eq, Casei("CASEI", Function(PropertyName))))
 
 # BinaryComparisonPredicate date instanst
 
@@ -124,7 +124,7 @@ BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator
 
 ==>
 
-BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), DateInstant("DATE")))
+BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, Eq, DateInstant("DATE")))
 
 # BinaryComparisonPredicate timestamp instanst
 
@@ -132,7 +132,7 @@ BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator
 
 ==>
 
-BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), TimestampInstant("TIMESTAMP")))
+BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, Eq, TimestampInstant("TIMESTAMP")))
 
 # BinaryComparisonPredicate arithmetic
 
@@ -140,7 +140,7 @@ BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator
 
 ==>
 
-BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), NumericLiteral, ArithOp, NumericLiteral))
+BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, Eq, NumericLiteral, ArithOp, NumericLiteral))
 
 # BinaryComparisonPredicate numeric literal
 
@@ -148,7 +148,7 @@ BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator
 
 ==>
 
-BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), NumericLiteral))
+BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, Eq, NumericLiteral))
 
 # BinaryComparisonPredicate PropertyName
 
@@ -156,7 +156,7 @@ BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator
 
 ==>
 
-BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), PropertyName))
+BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, Eq, PropertyName))
 
 # BinaryComparisonPredicate Function
 
@@ -164,7 +164,7 @@ BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator
 
 ==>
 
-BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), Function))
+BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, Eq, Function))
 
 # binary comparison like
 

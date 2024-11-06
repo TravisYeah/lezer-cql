@@ -25,7 +25,7 @@ IsBetweenPredicate {
 }
 
 BinaryComparisonPredicate {
-	scalarExpression ComparisonOperator scalarExpression |
+	scalarExpression comparisonOperator scalarExpression |
 	booleanTerm !and kw<"and"> booleanTerm |
 	booleanTerm !or kw<"or"> booleanTerm
 }
@@ -85,7 +85,7 @@ CharacterLiteral { "'" character* "'" }
 
 character { alpha | digit | characterWhitespace | escapeQuote }
 
-ComparisonOperator {
+comparisonOperator {
 	Eq |
 	Neq |
 	Le |
