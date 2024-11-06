@@ -150,3 +150,19 @@ BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator
 
 BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), ArithmeticExpression))
 
+# BinaryComparisonPredicate PropertyName
+
+'test' = test
+
+==>
+
+BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), ArithmeticExpression(PropertyName)))
+
+# BinaryComparisonPredicate Function
+
+'test' = fn()
+
+==>
+
+BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), ArithmeticExpression(Function)))
+
