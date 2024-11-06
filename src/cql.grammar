@@ -9,7 +9,7 @@ booleanTerm {
 
 primary {
 	predicate |
-	BooleanLiteral
+	boolean
 }
 
 predicate {
@@ -20,10 +20,6 @@ comparisonPredicate {
 	BinaryComparisonPredicate |
 	IsLikePredicate |
 	IsBetweenPredicate
-}
-
-BinaryExpression {
-
 }
 
 IsBetweenPredicate {
@@ -38,7 +34,7 @@ scalarExpression {
 	characterClause |
 	instantInstance |
 	arithmeticExpression |
-	BooleanLiteral
+	boolean
 }
 
 IsLikePredicate { characterExpression kw<"NOT">? kw<"LIKE"> patternExpression }
@@ -110,10 +106,7 @@ BooleanOr {
 	booleanTerm !or kw<"or"> booleanTerm
 }
 
-BooleanLiteral { True | False }
-
-True { kw<"TRUE"> | kw<"true"> }
-False { kw<"FALSE"> | kw<"false"> }
+boolean { @specialize[@name=BooleanLiteral]<identifier, "true" | "TRUE" | "false" | "FALSE"> }
 
 arithmeticExpression { arithmeticTerm  (arithmeticOperatorPlusMinus arithmeticTerm)? }
 

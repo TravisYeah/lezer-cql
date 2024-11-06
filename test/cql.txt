@@ -4,7 +4,7 @@ FALSE
 
 ==>
 
-BooleanExpression(BooleanLiteral(False("FALSE")))
+BooleanExpression(BooleanLiteral)
 
 # false
 
@@ -12,7 +12,7 @@ false
 
 ==>
 
-BooleanExpression(BooleanLiteral(False("false")))
+BooleanExpression(BooleanLiteral)
 
 # TRUE
 
@@ -20,7 +20,7 @@ TRUE
 
 ==>
 
-BooleanExpression(BooleanLiteral(True("TRUE")))
+BooleanExpression(BooleanLiteral)
 
 # true
 
@@ -28,7 +28,7 @@ true
 
 ==>
 
-BooleanExpression(BooleanLiteral(True("true")))
+BooleanExpression(BooleanLiteral)
 
 # and
 
@@ -36,7 +36,7 @@ TRUE and FALSE
 
 ==>
 
-BooleanExpression(BooleanAnd(BooleanLiteral(True("TRUE")), "and", BooleanLiteral(False("FALSE"))))
+BooleanExpression(BooleanAnd(BooleanLiteral, "and", BooleanLiteral))
 
 # or
 
@@ -44,7 +44,7 @@ TRUE or FALSE
 
 ==>
 
-BooleanExpression(BooleanOr(BooleanLiteral(True("TRUE")), "or", BooleanLiteral(False("FALSE"))))
+BooleanExpression(BooleanOr(BooleanLiteral, "or", BooleanLiteral))
 
 # and or
 
@@ -52,7 +52,7 @@ TRUE and FALSE or TRUE
 
 ==>
 
-BooleanExpression(BooleanOr(BooleanAnd(BooleanLiteral(True("TRUE")), "and", BooleanLiteral(False("FALSE"))), "or", BooleanLiteral(True("TRUE"))))
+BooleanExpression(BooleanOr(BooleanAnd(BooleanLiteral, "and", BooleanLiteral), "or", BooleanLiteral))
 
 # or and
 
@@ -60,7 +60,7 @@ TRUE or FALSE and TRUE
 
 ==>
 
-BooleanExpression(BooleanOr(BooleanLiteral(True("TRUE")), "or", BooleanAnd(BooleanLiteral(False("FALSE")), "and", BooleanLiteral(True("TRUE")))))
+BooleanExpression(BooleanOr(BooleanLiteral, "or", BooleanAnd(BooleanLiteral, "and", BooleanLiteral)))
 
 # NOT true
 
@@ -68,7 +68,7 @@ NOT true
 
 ==>
 
-BooleanExpression(NegatedBooleanTerm("NOT", BooleanLiteral(True("true"))))
+BooleanExpression(NegatedBooleanTerm("NOT", BooleanLiteral))
 
 # BinaryComparisonPredicate boolean literals
 
@@ -76,7 +76,7 @@ true = true
 
 ==>
 
-BooleanExpression(BinaryComparisonPredicate(BooleanLiteral(True("true")), ComparisonOperator(Eq), BooleanLiteral(True("true"))))
+BooleanExpression(BinaryComparisonPredicate(BooleanLiteral, ComparisonOperator(Eq), BooleanLiteral))
 
 # BinaryComparisonPredicate character clause
 
