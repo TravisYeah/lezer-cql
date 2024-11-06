@@ -118,3 +118,18 @@ BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator
 
 BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), Casei(CharacterExpression(Function(PropertyName)))))
 
+# BinaryComparisonPredicate date instanst
+
+'test' = DATE('2000-01-01')
+
+==>
+
+BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), DateInstant))
+
+# BinaryComparisonPredicate timestamp instanst
+
+'test' = TIMESTAMP('2000-01-01T12:01:01Z')
+
+==>
+
+BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), TimestampInstant))

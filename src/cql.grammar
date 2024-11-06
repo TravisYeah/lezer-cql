@@ -26,7 +26,8 @@ BinaryComparisonPredicate {
 
 scalarExpression {
 	characterClause |
-	BooleanLiteral
+	BooleanLiteral |
+	instantInstance
 }
 
 PropertyName {
@@ -97,7 +98,44 @@ BooleanLiteral { True | False }
 True { "TRUE" | "true" }
 False { "FALSE" | "false" }
 
+instantInstance { DateInstant | TimestampInstant }
+
+DateInstant { "DATE" "(" dateInstantString ")" }
+
+dateInstantString { "'" fullDate "'" }
+
+TimestampInstant { "TIMESTAMP" "(" timestampInstantString ")" }
+
+timestampInstantString { "'" fullDate "T" utcTime "'" }
+
+intervalInstance { "INTERVAL" "(" instantParameter "," instantParameter ")" }
+
+instantParameter {
+	dateInstantString |
+	timestampInstantString |
+	"'..'" |
+	propertyName |
+	function
+}
+
+fullDate { dateYear "-" dateMonth "-" dateDay }
+
+dateYear { digit digit digit digit }
+
+dateMonth { digit digit }
+
+dateDay { digit digit }
+
+utcTime { timeHour ":" timeMinute ":" timeSecond "Z" }
+
+timeHour { digit digit }
+
+timeMinute { digit digit }
+
+timeSecond { digit digit ("." digit digit*)? }
+
 @precedence {
+	DateInstant
 	Casei
 	Function
   and @left
