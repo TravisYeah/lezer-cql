@@ -92,7 +92,7 @@ BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator
 
 ==>
 
-BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), Casei("CASEI", CharacterExpression(CharacterLiteral))))
+BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), Casei("CASEI", CharacterLiteral)))
 
 # BinaryComparisonPredicate character clause property name
 
@@ -100,7 +100,7 @@ BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator
 
 ==>
 
-BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), Casei("CASEI", CharacterExpression(PropertyName))))
+BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), Casei("CASEI", PropertyName)))
 
 # BinaryComparisonPredicate character clause property name quoted
 
@@ -108,7 +108,7 @@ BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator
 
 ==>
 
-BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), Casei("CASEI", CharacterExpression(PropertyName))))
+BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), Casei("CASEI", PropertyName)))
 
 # BinaryComparisonPredicate casei function
 
@@ -116,7 +116,7 @@ BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator
 
 ==>
 
-BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), Casei("CASEI", CharacterExpression(Function(PropertyName)))))
+BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), Casei("CASEI", Function(PropertyName))))
 
 # BinaryComparisonPredicate date instanst
 
@@ -172,7 +172,7 @@ BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator
 
 ==>
 
-BooleanExpression(IsLikePredicate(CharacterExpression(CharacterLiteral), "LIKE", CharacterLiteral))
+BooleanExpression(IsLikePredicate(CharacterLiteral, "LIKE", CharacterLiteral))
 
 # binary comparison not like
 
@@ -180,7 +180,7 @@ BooleanExpression(IsLikePredicate(CharacterExpression(CharacterLiteral), "LIKE",
 
 ==>
 
-BooleanExpression(IsLikePredicate(CharacterExpression(CharacterLiteral), "NOT", "LIKE", CharacterLiteral))
+BooleanExpression(IsLikePredicate(CharacterLiteral, "NOT", "LIKE", CharacterLiteral))
 
 # between comparison
 

@@ -41,7 +41,7 @@ scalarExpression {
 	BooleanLiteral
 }
 
-IsLikePredicate { CharacterExpression kw<"NOT">? kw<"LIKE"> patternExpression }
+IsLikePredicate { characterExpression kw<"NOT">? kw<"LIKE"> patternExpression }
 
 patternExpression {
 	kw<"CASEI"> "(" patternExpression ")" |
@@ -61,14 +61,14 @@ characterClause {
 }
 
 Casei {
-	kw<"CASEI"> "(" CharacterExpression ")"
+	kw<"CASEI"> "(" characterExpression ")"
 }
 
 Accenti {
-	kw<"Accenti"> "(" CharacterExpression ")"
+	kw<"Accenti"> "(" characterExpression ")"
 }
 
-CharacterExpression {
+characterExpression {
 	characterClause |
 	PropertyName |
 	Function
