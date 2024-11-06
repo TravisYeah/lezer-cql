@@ -166,3 +166,19 @@ BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator
 
 BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), ArithmeticExpression(Function)))
 
+# binary comparison like
+
+'test' LIKE 'test2'
+
+==>
+
+BooleanExpression(IsLikePredicate(CharacterExpression(CharacterLiteral), CharacterLiteral))
+
+# binary comparison not like
+
+'test' NOT LIKE 'test2'
+
+==>
+
+BooleanExpression(IsLikePredicate(CharacterExpression(CharacterLiteral), CharacterLiteral))
+
