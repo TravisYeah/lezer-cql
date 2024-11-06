@@ -27,7 +27,8 @@ BinaryComparisonPredicate {
 scalarExpression {
 	characterClause |
 	BooleanLiteral |
-	instantInstance
+	instantInstance |
+	ArithmeticExpression
 }
 
 PropertyName {
@@ -98,6 +99,47 @@ BooleanLiteral { True | False }
 True { "TRUE" | "true" }
 False { "FALSE" | "false" }
 
+ArithmeticExpression { arithmeticTerm  (arithmeticOperatorPlusMinus arithmeticTerm)? }
+
+arithmeticOperatorPlusMinus { "+" | "-" }
+
+arithmeticTerm { powerTerm (arithmeticOperatorMultDiv powerTerm)? }
+
+arithmeticOperatorMultDiv { "*" | "/" | "%" | "div" }
+
+powerTerm { arithmeticFactor ( !power "^" arithmeticFactor )? }
+
+arithmeticFactor { 
+	"(" ArithmeticExpression ")" |
+	arithmeticOperand
+}
+
+arithmeticOperand {
+	numericLiteral |
+	PropertyName |
+	Function
+}
+
+numericLiteral { sign? unsignedNumericLiteral }
+
+unsignedNumericLiteral { decimalNumericLiteral | scientificNumericLiteral }
+
+signedNumericLiteral { sign? unsignedNumericLiteral }
+
+decimalNumericLiteral { unsignedInteger ( "." unsignedInteger? )? | "." unsignedInteger }
+
+scientificNumericLiteral { mantissa "E" exponent }
+
+mantissa { decimalNumericLiteral }
+
+exponent { signedInteger }
+
+signedInteger { sign? unsignedInteger }
+
+unsignedInteger { digit+ }
+
+sign { "+" | "-" }
+
 instantInstance { DateInstant | TimestampInstant }
 
 DateInstant { "DATE" "(" dateInstantString ")" }
@@ -114,8 +156,8 @@ instantParameter {
 	dateInstantString |
 	timestampInstantString |
 	"'..'" |
-	propertyName |
-	function
+	PropertyName |
+	Function
 }
 
 fullDate { dateYear "-" dateMonth "-" dateDay }
@@ -138,6 +180,9 @@ timeSecond { digit digit ("." digit digit*)? }
 	DateInstant
 	Casei
 	Function
+  power @right
+  arithmeticOperatorMultDiv @left
+	arithmeticOperatorPlusMinus @left
   and @left
   or @left
 }
