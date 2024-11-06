@@ -22,7 +22,7 @@ comparisonPredicate {
 }
 
 BinaryComparisonPredicate {
-	scalarExpression ComparisonOperator scalarExpression 
+	scalarExpression ComparisonOperator scalarExpression
 }
 
 scalarExpression {
@@ -32,11 +32,11 @@ scalarExpression {
 	BooleanLiteral
 }
 
-IsLikePredicate { CharacterExpression "NOT"? "LIKE" patternExpression }
+IsLikePredicate { CharacterExpression kw<"NOT">? kw<"LIKE"> patternExpression }
 
 patternExpression {
-	"CASEI" "(" patternExpression ")" |
-	"ACCENTI" "(" patternExpression ")" |
+	kw<"CASEI"> "(" patternExpression ")" |
+	kw<"ACCENTI"> "(" patternExpression ")" |
 	CharacterLiteral
 }
 
@@ -45,8 +45,6 @@ PropertyName {
 	"\"" identifier "\""
 }
 
-identifier { identifierStart identifierPart* }
-
 characterClause {
 	Casei |
 	Accenti |
@@ -54,11 +52,11 @@ characterClause {
 }
 
 Casei {
-	"CASEI" "(" CharacterExpression ")"
+	kw<"CASEI"> "(" CharacterExpression ")"
 }
 
 Accenti {
-	"Accenti" "(" CharacterExpression ")"
+	kw<"Accenti"> "(" CharacterExpression ")"
 }
 
 CharacterExpression {
@@ -92,33 +90,33 @@ ComparisonOperator {
 }
 
 NegatedBooleanTerm {
-	"not" booleanTerm
+	kw<"NOT"> booleanTerm
 }
 
 BooleanAnd {
-	booleanTerm !and "and" booleanTerm
+	booleanTerm !and kw<"and"> booleanTerm
 }
 
 BooleanOr {
-	booleanTerm !or "or" booleanTerm
+	booleanTerm !or kw<"or"> booleanTerm
 }
 
 BooleanLiteral { True | False }
 
-True { "TRUE" | "true" }
-False { "FALSE" | "false" }
+True { kw<"TRUE"> | kw<"true"> }
+False { kw<"FALSE"> | kw<"false"> }
 
 ArithmeticExpression { arithmeticTerm  (arithmeticOperatorPlusMinus arithmeticTerm)? }
 
-arithmeticOperatorPlusMinus { "+" | "-" }
+arithmeticOperatorPlusMinus { ArithOp<"+"> | ArithOp<"-"> }
 
 arithmeticTerm { powerTerm (arithmeticOperatorMultDiv powerTerm)? }
 
-arithmeticOperatorMultDiv { "*" | "/" | "%" | "div" }
+arithmeticOperatorMultDiv { ArithOp<"*"> | ArithOp<"/"> | ArithOp<"%"> | kw<"div"> }
 
-powerTerm { arithmeticFactor ( !power "^" arithmeticFactor )? }
+powerTerm { arithmeticFactor ( !power ArithOp<"^"> arithmeticFactor )? }
 
-arithmeticFactor { 
+arithmeticFactor {
 	"(" ArithmeticExpression ")" |
 	arithmeticOperand
 }
@@ -137,7 +135,7 @@ signedNumericLiteral { sign? unsignedNumericLiteral }
 
 decimalNumericLiteral { unsignedInteger ( "." unsignedInteger? )? | "." unsignedInteger }
 
-scientificNumericLiteral { mantissa "E" exponent }
+scientificNumericLiteral { mantissa kw<"E"> exponent }
 
 mantissa { decimalNumericLiteral }
 
@@ -151,15 +149,15 @@ sign { "+" | "-" }
 
 instantInstance { DateInstant | TimestampInstant }
 
-DateInstant { "DATE" "(" dateInstantString ")" }
+DateInstant { kw<"DATE"> "(" dateInstantString ")" }
 
 dateInstantString { "'" fullDate "'" }
 
-TimestampInstant { "TIMESTAMP" "(" timestampInstantString ")" }
+TimestampInstant { kw<"TIMESTAMP"> "(" timestampInstantString ")" }
 
 timestampInstantString { "'" fullDate "T" utcTime "'" }
 
-intervalInstance { "INTERVAL" "(" instantParameter "," instantParameter ")" }
+intervalInstance { kw<"INTERVAL"> "(" instantParameter "," instantParameter ")" }
 
 instantParameter {
 	dateInstantString |
@@ -199,6 +197,7 @@ timeSecond { digit digit ("." digit digit*)? }
 }
 
 @tokens {
+	identifier { identifierStart identifierPart* }
 	alpha {
 		$[\u{0007}-\u{0008}] |
 		$[\u{0021}-\u{0026}] |
@@ -213,7 +212,7 @@ timeSecond { digit digit ("." digit digit*)? }
 		$[\u{2060}-\u{2FFF}] |
 		$[\u{3001}-\u{D7FF}] |
 		$[\u{E000}-\u{FFFD}] |
-		$[\u{10000}-\u{10FFFF}] 
+		$[\u{10000}-\u{10FFFF}]
 	}
 	digit { $[\u{0030}-\u{0039}] }
 	characterWhitespace {
@@ -278,8 +277,12 @@ timeSecond { digit digit ("." digit digit*)? }
   space { @whitespace+ }
 
 	@precedence { space, characterWhitespace }
-	@precedence { space, identifierStart, identifierPart }
+	@precedence { space, identifierStart, identifierPart, identifier }
 }
 
 @skip { space }
+
+kw<term> { @specialize[@name={term}]<identifier, term> }
+
+ArithOp<expr> { expr }
 

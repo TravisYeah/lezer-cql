@@ -4,7 +4,7 @@ FALSE
 
 ==>
 
-BooleanExpression(BooleanLiteral(False))
+BooleanExpression(BooleanLiteral(False("FALSE")))
 
 # false
 
@@ -12,7 +12,7 @@ false
 
 ==>
 
-BooleanExpression(BooleanLiteral(False))
+BooleanExpression(BooleanLiteral(False("false")))
 
 # TRUE
 
@@ -20,15 +20,15 @@ TRUE
 
 ==>
 
-BooleanExpression(BooleanLiteral(True))
+BooleanExpression(BooleanLiteral(True("TRUE")))
 
-# true 
+# true
 
 true
 
 ==>
 
-BooleanExpression(BooleanLiteral(True))
+BooleanExpression(BooleanLiteral(True("true")))
 
 # and
 
@@ -36,7 +36,7 @@ TRUE and FALSE
 
 ==>
 
-BooleanExpression(BooleanAnd(BooleanLiteral(True), BooleanLiteral(False)))
+BooleanExpression(BooleanAnd(BooleanLiteral(True("TRUE")), "and", BooleanLiteral(False("FALSE"))))
 
 # or
 
@@ -44,7 +44,7 @@ TRUE or FALSE
 
 ==>
 
-BooleanExpression(BooleanOr(BooleanLiteral(True), BooleanLiteral(False)))
+BooleanExpression(BooleanOr(BooleanLiteral(True("TRUE")), "or", BooleanLiteral(False("FALSE"))))
 
 # and or
 
@@ -52,7 +52,7 @@ TRUE and FALSE or TRUE
 
 ==>
 
-BooleanExpression(BooleanOr(BooleanAnd(BooleanLiteral(True), BooleanLiteral(False)), BooleanLiteral(True)))
+BooleanExpression(BooleanOr(BooleanAnd(BooleanLiteral(True("TRUE")), "and", BooleanLiteral(False("FALSE"))), "or", BooleanLiteral(True("TRUE"))))
 
 # or and
 
@@ -60,15 +60,15 @@ TRUE or FALSE and TRUE
 
 ==>
 
-BooleanExpression(BooleanOr(BooleanLiteral(True), BooleanAnd(BooleanLiteral(False), BooleanLiteral(True))))
+BooleanExpression(BooleanOr(BooleanLiteral(True("TRUE")), "or", BooleanAnd(BooleanLiteral(False("FALSE")), "and", BooleanLiteral(True("TRUE")))))
 
-# not true 
+# NOT true
 
-not true
+NOT true
 
 ==>
 
-BooleanExpression(NegatedBooleanTerm(BooleanLiteral(True)))
+BooleanExpression(NegatedBooleanTerm("NOT", BooleanLiteral(True("true"))))
 
 # BinaryComparisonPredicate boolean literals
 
@@ -76,7 +76,7 @@ true = true
 
 ==>
 
-BooleanExpression(BinaryComparisonPredicate(BooleanLiteral(True), ComparisonOperator(Eq), BooleanLiteral(True)))
+BooleanExpression(BinaryComparisonPredicate(BooleanLiteral(True("true")), ComparisonOperator(Eq), BooleanLiteral(True("true"))))
 
 # BinaryComparisonPredicate character clause
 
@@ -92,7 +92,7 @@ BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator
 
 ==>
 
-BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), Casei(CharacterExpression(CharacterLiteral))))
+BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), Casei("CASEI", CharacterExpression(CharacterLiteral))))
 
 # BinaryComparisonPredicate character clause property name
 
@@ -100,7 +100,7 @@ BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator
 
 ==>
 
-BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), Casei(CharacterExpression(PropertyName))))
+BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), Casei("CASEI", CharacterExpression(PropertyName))))
 
 # BinaryComparisonPredicate character clause property name quoted
 
@@ -108,7 +108,7 @@ BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator
 
 ==>
 
-BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), Casei(CharacterExpression(PropertyName))))
+BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), Casei("CASEI", CharacterExpression(PropertyName))))
 
 # BinaryComparisonPredicate casei function
 
@@ -116,7 +116,7 @@ BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator
 
 ==>
 
-BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), Casei(CharacterExpression(Function(PropertyName)))))
+BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), Casei("CASEI", CharacterExpression(Function(PropertyName)))))
 
 # BinaryComparisonPredicate date instanst
 
@@ -124,7 +124,7 @@ BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator
 
 ==>
 
-BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), DateInstant))
+BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), DateInstant("DATE")))
 
 # BinaryComparisonPredicate timestamp instanst
 
@@ -132,7 +132,7 @@ BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator
 
 ==>
 
-BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), TimestampInstant))
+BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), TimestampInstant("TIMESTAMP")))
 
 # BinaryComparisonPredicate arithmetic
 
@@ -140,7 +140,7 @@ BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator
 
 ==>
 
-BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), ArithmeticExpression))
+BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), ArithmeticExpression(ArithOp)))
 
 # BinaryComparisonPredicate numeric literal
 
@@ -172,7 +172,7 @@ BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator
 
 ==>
 
-BooleanExpression(IsLikePredicate(CharacterExpression(CharacterLiteral), CharacterLiteral))
+BooleanExpression(IsLikePredicate(CharacterExpression(CharacterLiteral), "LIKE", CharacterLiteral))
 
 # binary comparison not like
 
@@ -180,5 +180,5 @@ BooleanExpression(IsLikePredicate(CharacterExpression(CharacterLiteral), Charact
 
 ==>
 
-BooleanExpression(IsLikePredicate(CharacterExpression(CharacterLiteral), CharacterLiteral))
+BooleanExpression(IsLikePredicate(CharacterExpression(CharacterLiteral), "NOT", "LIKE", CharacterLiteral))
 
