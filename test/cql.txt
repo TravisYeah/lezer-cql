@@ -213,3 +213,11 @@ BooleanExpression(IsInListPredicate(NumericLiteral, "IN", NumericLiteral, Numeri
 ==>
 
 BooleanExpression(IsInListPredicate(NumericLiteral, "NOT", "IN", NumericLiteral, NumericLiteral))
+
+# is null comparison
+
+1 IS NULL
+
+==>
+
+BooleanExpression(IsNullPredicate(NumericLiteral, "IS", "NULL"))

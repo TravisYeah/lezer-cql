@@ -18,8 +18,11 @@ comparisonPredicate {
 	BinaryComparisonPredicate |
 	IsLikePredicate |
 	IsBetweenPredicate |
-	IsInListPredicate
+	IsInListPredicate |
+	IsNullPredicate
 }
+
+IsNullPredicate { arithmeticExpression kw<"IS"> kw<"NOT">? kw<"NULL"> }
 
 IsInListPredicate { scalarExpression ~negated kw<"NOT">? kw<"IN"> "(" inList ")" }
 
