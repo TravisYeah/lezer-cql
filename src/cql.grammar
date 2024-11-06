@@ -2,8 +2,11 @@
 
 booleanTerm {
 	primary |
-	kw<"NOT"> booleanTerm
+	kw<"NOT"> booleanTerm |
+	ParenthesizedExpression
 }
+
+ParenthesizedExpression { "(" booleanTerm ")" }
 
 primary {
 	predicate |
@@ -35,7 +38,7 @@ arrayOperand {
 
 arrayExpression {
 	"(" ")" |
-	"(" arrayElement ("," arrayElement)* ")"
+	"(" ~arrayElement ("," arrayElement)* ")"
 }
 
 arrayElement {
@@ -43,7 +46,11 @@ arrayElement {
 	temporalInstance |
 	spatialInstance |
 	arrayExpression |
-	booleanTerm
+	boolean |
+	NumericLiteral |
+	PropertyName |
+	Function |
+	ParenthesizedExpression
 }
 
 arrayFunction {

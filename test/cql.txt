@@ -270,10 +270,10 @@ A_EQUALS(a, b)
 
 BooleanExpression("A_EQUALS", PropertyName, PropertyName)
 
-# array predicate
+# grouped expression
 
-A_EQUALS(a, b)
+(TRUE and FALSE)
 
 ==>
 
-BooleanExpression("A_EQUALS", PropertyName, PropertyName)
+BooleanExpression(ParenthesizedExpression(BinaryComparisonPredicate(BooleanLiteral, "and" BooleanLiteral)))
