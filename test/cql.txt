@@ -142,3 +142,11 @@ BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator
 
 BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), ArithmeticExpression))
 
+# BinaryComparisonPredicate numeric literal
+
+'test' = 1
+
+==>
+
+BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), ArithmeticExpression))
+

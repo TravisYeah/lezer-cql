@@ -26,9 +26,9 @@ BinaryComparisonPredicate {
 
 scalarExpression {
 	characterClause |
-	BooleanLiteral |
 	instantInstance |
-	ArithmeticExpression
+	ArithmeticExpression |
+	BooleanLiteral
 }
 
 PropertyName {
@@ -177,6 +177,8 @@ timeMinute { digit digit }
 timeSecond { digit digit ("." digit digit*)? }
 
 @precedence {
+	NumericLiteral
+	ArithmeticExpression
 	DateInstant
 	Casei
 	Function
