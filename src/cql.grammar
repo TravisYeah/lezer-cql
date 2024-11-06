@@ -18,8 +18,18 @@ predicate {
 
 comparisonPredicate {
 	BinaryComparisonPredicate |
-	IsLikePredicate
+	IsLikePredicate |
+	IsBetweenPredicate
 }
+
+IsBetweenPredicate {
+	NumericExpression kw<"BETWEEN"> NumericExpression kw<"AND"> NumericExpression
+}
+
+NumericExpression {
+	ArithmeticExpression
+}
+
 
 BinaryComparisonPredicate {
 	scalarExpression ComparisonOperator scalarExpression

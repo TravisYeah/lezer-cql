@@ -182,3 +182,11 @@ BooleanExpression(IsLikePredicate(CharacterExpression(CharacterLiteral), "LIKE",
 
 BooleanExpression(IsLikePredicate(CharacterExpression(CharacterLiteral), "NOT", "LIKE", CharacterLiteral))
 
+# between comparison
+
+1 BETWEEN 2 AND 3
+
+==>
+
+BooleanExpression(IsBetweenPredicate(NumericExpression(ArithmeticExpression), "BETWEEN", NumericExpression(ArithmeticExpression), "AND", NumericExpression(ArithmeticExpression)))
+
