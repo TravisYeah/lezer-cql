@@ -50,7 +50,22 @@ Accenti {
 	"Accenti" "(" CharacterExpression ")"
 }
 
-CharacterExpression { characterClause | PropertyName }
+CharacterExpression {
+	characterClause |
+	PropertyName |
+	Function
+}
+
+Function { identifier "(" argumentList? ")" }
+
+argumentList { argument ("," argument)* }
+
+argument {
+	characterClause |
+	booleanTerm |
+	PropertyName |
+	Function
+}
 
 CharacterLiteral { "'" character* "'" }
 
@@ -83,6 +98,8 @@ True { "TRUE" | "true" }
 False { "FALSE" | "false" }
 
 @precedence {
+	Casei
+	Function
   and @left
   or @left
 }

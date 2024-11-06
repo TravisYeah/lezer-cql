@@ -110,3 +110,11 @@ BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator
 
 BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), Casei(CharacterExpression(PropertyName))))
 
+# BinaryComparisonPredicate casei function
+
+'test' = CASEI(fn(test))
+
+==>
+
+BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), Casei(CharacterExpression(Function(PropertyName)))))
+
