@@ -22,14 +22,13 @@ comparisonPredicate {
 	IsBetweenPredicate
 }
 
+BinaryExpression {
+
+}
+
 IsBetweenPredicate {
-	NumericExpression kw<"BETWEEN"> NumericExpression kw<"AND"> NumericExpression
+	arithmeticExpression kw<"BETWEEN"> arithmeticExpression kw<"AND"> arithmeticExpression
 }
-
-NumericExpression {
-	ArithmeticExpression
-}
-
 
 BinaryComparisonPredicate {
 	scalarExpression ComparisonOperator scalarExpression
@@ -38,7 +37,7 @@ BinaryComparisonPredicate {
 scalarExpression {
 	characterClause |
 	instantInstance |
-	ArithmeticExpression |
+	arithmeticExpression |
 	BooleanLiteral
 }
 
@@ -116,7 +115,7 @@ BooleanLiteral { True | False }
 True { kw<"TRUE"> | kw<"true"> }
 False { kw<"FALSE"> | kw<"false"> }
 
-ArithmeticExpression { arithmeticTerm  (arithmeticOperatorPlusMinus arithmeticTerm)? }
+arithmeticExpression { arithmeticTerm  (arithmeticOperatorPlusMinus arithmeticTerm)? }
 
 arithmeticOperatorPlusMinus { ArithOp<"+"> | ArithOp<"-"> }
 
@@ -127,17 +126,17 @@ arithmeticOperatorMultDiv { ArithOp<"*"> | ArithOp<"/"> | ArithOp<"%"> | kw<"div
 powerTerm { arithmeticFactor ( !power ArithOp<"^"> arithmeticFactor )? }
 
 arithmeticFactor {
-	"(" ArithmeticExpression ")" |
+	"(" arithmeticExpression ")" |
 	arithmeticOperand
 }
 
 arithmeticOperand {
-	numericLiteral |
+	NumericLiteral |
 	PropertyName |
 	Function
 }
 
-numericLiteral { sign? unsignedNumericLiteral }
+NumericLiteral { sign? unsignedNumericLiteral }
 
 unsignedNumericLiteral { decimalNumericLiteral | scientificNumericLiteral }
 
@@ -195,7 +194,7 @@ timeSecond { digit digit ("." digit digit*)? }
 
 @precedence {
 	NumericLiteral
-	ArithmeticExpression
+	arithmeticExpression
 	DateInstant
 	Casei
 	Function

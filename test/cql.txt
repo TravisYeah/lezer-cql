@@ -140,7 +140,7 @@ BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator
 
 ==>
 
-BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), ArithmeticExpression(ArithOp)))
+BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), NumericLiteral, ArithOp, NumericLiteral))
 
 # BinaryComparisonPredicate numeric literal
 
@@ -148,7 +148,7 @@ BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator
 
 ==>
 
-BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), ArithmeticExpression))
+BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), NumericLiteral))
 
 # BinaryComparisonPredicate PropertyName
 
@@ -156,7 +156,7 @@ BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator
 
 ==>
 
-BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), ArithmeticExpression(PropertyName)))
+BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), PropertyName))
 
 # BinaryComparisonPredicate Function
 
@@ -164,7 +164,7 @@ BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator
 
 ==>
 
-BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), ArithmeticExpression(Function)))
+BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, ComparisonOperator(Eq), Function))
 
 # binary comparison like
 
@@ -188,5 +188,5 @@ BooleanExpression(IsLikePredicate(CharacterExpression(CharacterLiteral), "NOT", 
 
 ==>
 
-BooleanExpression(IsBetweenPredicate(NumericExpression(ArithmeticExpression), "BETWEEN", NumericExpression(ArithmeticExpression), "AND", NumericExpression(ArithmeticExpression)))
+BooleanExpression(IsBetweenPredicate(NumericLiteral, "BETWEEN", NumericLiteral, "AND", NumericLiteral))
 
