@@ -13,7 +13,8 @@ primary {
 predicate {
 	comparisonPredicate |
 	spatialPredicate |
-	temporalPredicate
+	temporalPredicate |
+	arrayPredicate
 }
 
 comparisonPredicate {
@@ -23,6 +24,35 @@ comparisonPredicate {
 	IsInListPredicate |
 	IsNullPredicate
 }
+
+arrayPredicate { arrayFunction "(" arrayOperand "," arrayOperand ")" }
+
+arrayOperand {
+	arrayExpression |
+	PropertyName |
+	Function
+}
+
+arrayExpression {
+	"(" ")" |
+	"(" arrayElement ("," arrayElement)* ")"
+}
+
+arrayElement {
+	characterClause |
+	temporalInstance |
+	spatialInstance |
+	arrayExpression |
+	booleanTerm
+}
+
+arrayFunction {
+	kw<"A_EQUALS"> |
+	kw<"A_CONTAINS"> |
+	kw<"A_CONTAINEDBY"> |
+	kw<"A_OVERLAPS">
+}
+
 
 temporalPredicate { temporalFunction "(" temporalExpression "," temporalExpression ")" }
 
