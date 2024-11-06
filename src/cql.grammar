@@ -2,8 +2,6 @@
 
 booleanTerm {
 	primary |
-	BooleanAnd |
-	BooleanOr |
 	NegatedBooleanTerm
 }
 
@@ -27,7 +25,9 @@ IsBetweenPredicate {
 }
 
 BinaryComparisonPredicate {
-	scalarExpression ComparisonOperator scalarExpression
+	scalarExpression ComparisonOperator scalarExpression |
+	booleanTerm !and kw<"and"> booleanTerm |
+	booleanTerm !or kw<"or"> booleanTerm
 }
 
 scalarExpression {
@@ -96,14 +96,6 @@ ComparisonOperator {
 
 NegatedBooleanTerm {
 	kw<"NOT"> booleanTerm
-}
-
-BooleanAnd {
-	booleanTerm !and kw<"and"> booleanTerm
-}
-
-BooleanOr {
-	booleanTerm !or kw<"or"> booleanTerm
 }
 
 boolean { @specialize[@name=BooleanLiteral]<identifier, "true" | "TRUE" | "false" | "FALSE"> }

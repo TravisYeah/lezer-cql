@@ -36,7 +36,7 @@ TRUE and FALSE
 
 ==>
 
-BooleanExpression(BooleanAnd(BooleanLiteral, "and", BooleanLiteral))
+BooleanExpression(BinaryComparisonPredicate(BooleanLiteral, "and", BooleanLiteral))
 
 # or
 
@@ -44,7 +44,7 @@ TRUE or FALSE
 
 ==>
 
-BooleanExpression(BooleanOr(BooleanLiteral, "or", BooleanLiteral))
+BooleanExpression(BinaryComparisonPredicate(BooleanLiteral, "or", BooleanLiteral))
 
 # and or
 
@@ -52,7 +52,7 @@ TRUE and FALSE or TRUE
 
 ==>
 
-BooleanExpression(BooleanOr(BooleanAnd(BooleanLiteral, "and", BooleanLiteral), "or", BooleanLiteral))
+BooleanExpression(BinaryComparisonPredicate(BinaryComparisonPredicate(BooleanLiteral, "and", BooleanLiteral), "or", BooleanLiteral))
 
 # or and
 
@@ -60,7 +60,7 @@ TRUE or FALSE and TRUE
 
 ==>
 
-BooleanExpression(BooleanOr(BooleanLiteral, "or", BooleanAnd(BooleanLiteral, "and", BooleanLiteral)))
+BooleanExpression(BinaryComparisonPredicate(BooleanLiteral, "or", BinaryComparisonPredicate(BooleanLiteral, "and", BooleanLiteral)))
 
 # NOT true
 
