@@ -2,7 +2,7 @@
 
 booleanTerm {
 	primary |
-	NegatedBooleanTerm
+	kw<"NOT"> booleanTerm
 }
 
 primary {
@@ -92,10 +92,6 @@ ComparisonOperator {
 	Gt |
 	Leq |
 	Gte
-}
-
-NegatedBooleanTerm {
-	kw<"NOT"> booleanTerm
 }
 
 boolean { @specialize[@name=BooleanLiteral]<identifier, "true" | "TRUE" | "false" | "FALSE"> }

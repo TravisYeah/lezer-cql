@@ -68,7 +68,7 @@ NOT true
 
 ==>
 
-BooleanExpression(NegatedBooleanTerm("NOT", BooleanLiteral))
+BooleanExpression("NOT", BooleanLiteral)
 
 # BinaryComparisonPredicate boolean literals
 
