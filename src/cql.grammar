@@ -2,7 +2,7 @@
 
 booleanTerm {
 	primary |
-	kw<"NOT"> booleanTerm |
+	Not booleanTerm |
 	ParenthesizedExpression
 }
 
@@ -107,7 +107,7 @@ geomExpression {
 }
 
 
-IsNullPredicate { isNullOperand kw<"IS"> kw<"NOT">? kw<"NULL"> }
+IsNullPredicate { isNullOperand Is Not? Null }
 
 isNullOperand {
 	temporalInstance |
@@ -115,18 +115,18 @@ isNullOperand {
 	arithmeticExpression
 }
 
-IsInListPredicate { scalarExpression ~negated kw<"NOT">? kw<"IN"> "(" inList ")" }
+IsInListPredicate { scalarExpression ~negated Not? In "(" inList ")" }
 
 inList { scalarExpression ("," scalarExpression)* }
 
 IsBetweenPredicate {
-	arithmeticExpression ~negated kw<"NOT">? kw<"BETWEEN"> arithmeticExpression kw<"AND"> arithmeticExpression
+	arithmeticExpression ~negated Not? Between arithmeticExpression And arithmeticExpression
 }
 
 BinaryComparisonPredicate {
 	scalarExpression comparisonOperator scalarExpression |
-	booleanTerm !and kw<"and"> booleanTerm |
-	booleanTerm !or kw<"or"> booleanTerm
+	booleanTerm !and And booleanTerm |
+	booleanTerm !or Or booleanTerm
 }
 
 scalarExpression {
@@ -136,7 +136,7 @@ scalarExpression {
 	boolean
 }
 
-IsLikePredicate { characterExpression ~negated kw<"NOT">? ~destructure kw<"LIKE"> patternExpression }
+IsLikePredicate { characterExpression ~negated Not? ~destructure Like patternExpression }
 
 patternExpression {
 	kw<"CASEI"> "(" patternExpression ")" |
@@ -145,22 +145,22 @@ patternExpression {
 }
 
 PropertyName {
-	identifier |
-	"\"" identifier "\""
+	Identifier |
+	"\"" Identifier "\""
 }
 
 characterClause {
-	Casei |
-	Accenti |
+	casei |
+	accenti |
 	CharacterLiteral
 }
 
-Casei {
+casei {
 	kw<"CASEI"> "(" characterExpression ")"
 }
 
-Accenti {
-	kw<"Accenti"> "(" characterExpression ")"
+accenti {
+	kw<"ACCENTI"> "(" characterExpression ")"
 }
 
 characterExpression {
@@ -169,7 +169,7 @@ characterExpression {
 	Function
 }
 
-Function { identifier "(" argumentList? ")" }
+Function { Identifier "(" argumentList? ")" }
 
 argumentList { argument ("," argument)* }
 
@@ -193,7 +193,7 @@ comparisonOperator {
 	Gte
 }
 
-boolean { @specialize[@name=BooleanLiteral]<identifier, "true" | "TRUE" | "false" | "FALSE"> }
+boolean { @specialize[@name=BooleanLiteral]<Identifier, "true" | "TRUE" | "false" | "FALSE"> }
 
 arithmeticExpression { arithmeticTerm  (arithmeticOperatorPlusMinus arithmeticTerm)? }
 
@@ -201,7 +201,7 @@ arithmeticOperatorPlusMinus { ArithOp<"+"> | ArithOp<"-"> }
 
 arithmeticTerm { powerTerm (arithmeticOperatorMultDiv powerTerm)? }
 
-arithmeticOperatorMultDiv { ArithOp<"*"> | ArithOp<"/"> | ArithOp<"%"> | kw<"div"> }
+arithmeticOperatorMultDiv { ArithOp<"*"> | ArithOp<"/"> | ArithOp<"%"> | Div }
 
 powerTerm { arithmeticFactor ( !power ArithOp<"^"> arithmeticFactor )? }
 
@@ -281,19 +281,19 @@ temporalInstance { instantInstance | intervalInstance }
 
 instantInstance { DateInstant | TimestampInstant }
 
-DateInstant { kw<"DATE"> "(" dateInstantString ")" }
+DateInstant { kw<"DATE"> "(" DateInstantString ")" }
 
-dateInstantString { "'" fullDate "'" }
+DateInstantString { "'" fullDate "'" }
 
-TimestampInstant { kw<"TIMESTAMP"> "(" timestampInstantString ")" }
+TimestampInstant { kw<"TIMESTAMP"> "(" TimestampInstantString ")" }
 
-timestampInstantString { "'" fullDate "T" utcTime "'" }
+TimestampInstantString { "'" fullDate "T" utcTime "'" }
 
 intervalInstance { kw<"INTERVAL"> "(" instantParameter "," instantParameter ")" }
 
 instantParameter {
-	dateInstantString |
-	timestampInstantString |
+	DateInstantString |
+	TimestampInstantString |
 	"'..'" |
 	PropertyName |
 	Function
@@ -315,11 +315,20 @@ timeMinute { digit digit }
 
 timeSecond { digit digit ("." digit digit*)? }
 
+Like { kw<"LIKE"> | kw<"like"> }
+Between { kw<"BETWEEN"> | kw<"between"> }
+Is { kw<"IS"> | kw<"is">  }
+Not { kw<"NOT"> | kw<"not"> }
+Null { kw<"NULL"> | kw<"null"> }
+And { kw<"AND"> | kw<"and"> }
+Or { kw<"OR"> | kw<"or"> }
+In { kw<"IN"> | kw<"in"> }
+Div { kw<"DIV"> kw<"div"> }
+
 @precedence {
 	NumericLiteral
 	arithmeticExpression
 	DateInstant
-	Casei
 	Function
   power @right
   arithmeticOperatorMultDiv @left
@@ -329,7 +338,7 @@ timeSecond { digit digit ("." digit digit*)? }
 }
 
 @tokens {
-	identifier { identifierStart identifierPart* }
+	Identifier { identifierStart identifierPart* }
 	alpha {
 		$[\u{0007}-\u{0008}] |
 		$[\u{0021}-\u{0026}] |
@@ -408,7 +417,7 @@ timeSecond { digit digit ("." digit digit*)? }
 	Gte { ">" "=" }
   space { @whitespace+ }
 
-	point { xCoord space yCoord (space zCoord)? }
+	point { xCoord @whitespace yCoord (@whitespace zCoord)? }
 
 	xCoord { NumericLiteral }
 
@@ -437,12 +446,13 @@ timeSecond { digit digit ("." digit digit*)? }
 	sign { "+" | "-" }
 
 	@precedence { space, characterWhitespace }
-	@precedence { space, identifierStart, identifierPart, identifier }
+	@precedence { space, identifierStart, identifierPart, Identifier }
 }
 
 @skip { space }
 
-kw<term> { @specialize[@name={term}]<identifier, term> }
+kw<term> { @specialize[@name={term}]<Identifier, term> }
 
 ArithOp<expr> { expr }
 
+@external propSource cqlHighlight from "./highlight"
