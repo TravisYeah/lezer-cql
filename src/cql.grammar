@@ -15,9 +15,9 @@ primary {
 
 predicate {
 	comparisonPredicate |
-	spatialPredicate |
-	temporalPredicate |
-	arrayPredicate
+	SpatialPredicate |
+	TemporalPredicate |
+	ArrayPredicate
 }
 
 comparisonPredicate {
@@ -28,7 +28,7 @@ comparisonPredicate {
 	IsNullPredicate
 }
 
-arrayPredicate { arrayFunction "(" arrayOperand "," arrayOperand ")" }
+ArrayPredicate { arrayFunction "(" arrayOperand "," arrayOperand ")" }
 
 arrayOperand {
 	arrayExpression |
@@ -61,7 +61,7 @@ arrayFunction {
 }
 
 
-temporalPredicate { temporalFunction "(" temporalExpression "," temporalExpression ")" }
+TemporalPredicate { temporalFunction "(" temporalExpression "," temporalExpression ")" }
 
 temporalExpression {
 	temporalInstance |
@@ -87,7 +87,7 @@ temporalFunction {
 	kw<"T_STARTS">
 }
 
-spatialPredicate { spatialFunction "(" geomExpression "," geomExpression ")" }
+SpatialPredicate { spatialFunction "(" geomExpression "," geomExpression ")" }
 
 spatialFunction {
 	kw<"S_INTERSECTS"> |

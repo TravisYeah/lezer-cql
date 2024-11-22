@@ -252,7 +252,7 @@ S_EQUALS(a, b)
 
 ==>
 
-BooleanExpression("S_EQUALS", PropertyName(Identifier), PropertyName(Identifier))
+BooleanExpression(SpatialPredicate("S_EQUALS", PropertyName(Identifier), PropertyName(Identifier)))
 
 # temporal predicate
 
@@ -260,7 +260,7 @@ T_AFTER(a, b)
 
 ==>
 
-BooleanExpression("T_AFTER", PropertyName(Identifier), PropertyName(Identifier))
+BooleanExpression(TemporalPredicate("T_AFTER", PropertyName(Identifier), PropertyName(Identifier)))
 
 # array predicate
 
@@ -268,7 +268,7 @@ A_EQUALS(a, b)
 
 ==>
 
-BooleanExpression("A_EQUALS", PropertyName(Identifier), PropertyName(Identifier))
+BooleanExpression(ArrayPredicate("A_EQUALS", PropertyName(Identifier), PropertyName(Identifier)))
 
 # grouped expression
 

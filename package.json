@@ -31,6 +31,6 @@
     "build": "lezer-generator src/cql.grammar -o src/parser && rollup -c",
     "build-debug": "lezer-generator src/cql.grammar --names -o src/parser && rollup -c",
     "prepare": "npm run build",
-    "test": "mocha test/test-cql.js"
+    "test": "npm run build && mocha test/test-cql.js"
   }
 }
