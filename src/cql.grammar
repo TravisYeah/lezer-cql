@@ -217,12 +217,12 @@ arithmeticOperand {
 }
 
 spatialInstance {
-	geometryLiteral |
-	geometryCollectionTaggedText |
-	bboxTaggedText
+	GeometryLiteral |
+	GeometryCollectionTaggedText |
+	BboxTaggedText
 }
 
-geometryLiteral {
+GeometryLiteral {
 	pointTaggedText |
 	linestringTaggedText |
 	polygonTaggedText |
@@ -243,7 +243,7 @@ multilinestringTaggedText { kw<"MULTILINESTRING"> kw<"Z">? multiLineStringText }
 
 multipolygonTaggedText { kw<"MULTIPOLYGON"> kw<"Z">? multiPolygonText }
 
-geometryCollectionTaggedText { kw<"GEOMETRYCOLLECTION"> kw<"Z">? geometryCollectionText }
+GeometryCollectionTaggedText { kw<"GEOMETRYCOLLECTION"> kw<"Z">? geometryCollectionText }
 
 pointText { "(" point ")" }
 
@@ -259,9 +259,9 @@ multiLineStringText { "(" lineStringText ("," lineStringText)* ")" }
 
 multiPolygonText { "(" polygonText ("," polygonText)* ")" }
 
-geometryCollectionText { "(" geometryLiteral ("," geometryLiteral)* ")" }
+geometryCollectionText { "(" GeometryLiteral ("," GeometryLiteral)* ")" }
 
-bboxTaggedText { kw<"BBOX"> bboxText }
+BboxTaggedText { kw<"BBOX"> bboxText }
 
 bboxText { "(" westBoundLon "," southBoundLat "," (minElev ",")? eastBoundLon "," northBoundLat ("," maxElev)? ")" }
 

@@ -236,7 +236,7 @@ POINT(0 1) IS NULL
 
 ==>
 
-BooleanExpression(IsNullPredicate("POINT", Is("IS"), Null("NULL")))
+BooleanExpression(IsNullPredicate(GeometryLiteral("POINT"), Is("IS"), Null("NULL")))
 
 # is null spatial 3D
 
@@ -244,7 +244,23 @@ POINT(0 1 2) IS NULL
 
 ==>
 
-BooleanExpression(IsNullPredicate("POINT", Is("IS"), Null("NULL")))
+BooleanExpression(IsNullPredicate(GeometryLiteral("POINT"), Is("IS"), Null("NULL")))
+
+# geometry collection is null
+
+GEOMETRYCOLLECTION(POINT(0 1)) IS NULL
+
+==>
+
+BooleanExpression(IsNullPredicate(GeometryCollectionTaggedText("GEOMETRYCOLLECTION", GeometryLiteral("POINT")), Is("IS"), Null("NULL")))
+
+# geometry collection is null
+
+BBOX(0, 1, 2, 3) IS NULL
+
+==>
+
+BooleanExpression(IsNullPredicate(BboxTaggedText("BBOX", NumericLiteral, NumericLiteral, NumericLiteral, NumericLiteral), Is("IS"), Null("NULL")))
 
 # spatial predicate
 
