@@ -150,6 +150,14 @@ BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, Eq, NumericLiteral
 
 BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, Eq, NumericLiteral))
 
+# BinaryComparisonPredicate negative numeric literal
+
+'test' = -1
+
+==>
+
+BooleanExpression(BinaryComparisonPredicate(CharacterLiteral, Eq, NumericLiteral))
+
 # BinaryComparisonPredicate PropertyName
 
 'test' = test
