@@ -245,11 +245,15 @@ multipolygonTaggedText { kw<"MULTIPOLYGON"> kw<"Z">? multiPolygonText }
 
 GeometryCollectionTaggedText { kw<"GEOMETRYCOLLECTION"> kw<"Z">? geometryCollectionText }
 
-pointText { "(" point ")" }
+@skip {} {
+	pointText { "(" point ")" }
 
-lineStringText { "(" point "," point ("," point)* ")" }
+	lineStringText { "(" point "," point ("," point)* ")" }
 
-linearRingText { kw<"EMPTY"> | "(" point "," point "," point "," point ("," point)* ")" }
+	linearRingText { kw<"EMPTY"> | "(" point "," point "," point "," point ("," point)* ")" }
+
+	point { NumericLiteral space NumericLiteral (space NumericLiteral)? }
+}
 
 polygonText {  "(" linearRingText ("," linearRingText)* ")" }
 
@@ -416,14 +420,6 @@ Div { kw<"DIV"> kw<"div"> }
 	Leq { "<" "=" }
 	Gte { ">" "=" }
   space { @whitespace+ }
-
-	point { xCoord @whitespace yCoord (@whitespace zCoord)? }
-
-	xCoord { NumericLiteral }
-
-	yCoord { NumericLiteral }
-
-	zCoord { NumericLiteral }
 
 	NumericLiteral { sign? unsignedNumericLiteral }
 
