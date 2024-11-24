@@ -180,7 +180,7 @@ argument {
 	Function
 }
 
-CharacterLiteral { "'" character* "'" }
+CharacterLiteral { "''" | "'" character* "'" }
 
 character { alpha | digit | characterWhitespace | escapeQuote }
 
