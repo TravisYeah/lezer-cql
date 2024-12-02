@@ -276,7 +276,7 @@ S_EQUALS(a, b)
 
 ==>
 
-BooleanExpression(SpatialPredicate("S_EQUALS", PropertyName(Identifier), PropertyName(Identifier)))
+BooleanExpression(SpatialPredicate("S_EQUALS", GeomExpression(PropertyName(Identifier)), GeomExpression(PropertyName(Identifier))))
 
 # temporal predicate
 
@@ -284,7 +284,7 @@ T_AFTER(a, b)
 
 ==>
 
-BooleanExpression(TemporalPredicate("T_AFTER", PropertyName(Identifier), PropertyName(Identifier)))
+BooleanExpression(TemporalPredicate("T_AFTER", TemporalExpression(PropertyName(Identifier)), TemporalExpression(PropertyName(Identifier))))
 
 # array predicate
 

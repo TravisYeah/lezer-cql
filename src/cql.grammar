@@ -61,9 +61,9 @@ arrayFunction {
 }
 
 
-TemporalPredicate { temporalFunction "(" temporalExpression "," temporalExpression ")" }
+TemporalPredicate { temporalFunction "(" TemporalExpression "," TemporalExpression ")" }
 
-temporalExpression {
+TemporalExpression {
 	temporalInstance |
 	PropertyName |
 	Function
@@ -87,7 +87,7 @@ temporalFunction {
 	kw<"T_STARTS">
 }
 
-SpatialPredicate { spatialFunction "(" geomExpression "," geomExpression ")" }
+SpatialPredicate { spatialFunction "(" GeomExpression "," GeomExpression ")" }
 
 spatialFunction {
 	kw<"S_INTERSECTS"> |
@@ -100,7 +100,7 @@ spatialFunction {
 	kw<"S_CONTAINS">
 }
 
-geomExpression {
+GeomExpression {
 	spatialInstance |
 	PropertyName |
 	Function
