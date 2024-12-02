@@ -246,13 +246,13 @@ multipolygonTaggedText { kw<"MULTIPOLYGON"> kw<"Z">? multiPolygonText }
 GeometryCollectionTaggedText { kw<"GEOMETRYCOLLECTION"> kw<"Z">? geometryCollectionText }
 
 @skip {} {
-	pointText { "(" point ")" }
+	pointText { "(" Point ")" }
 
-	lineStringText { "(" point "," point ("," point)* ")" }
+	lineStringText { "(" Point "," Point ("," Point)* ")" }
 
-	linearRingText { kw<"EMPTY"> | "(" point "," point "," point "," point ("," point)* ")" }
+	linearRingText { kw<"EMPTY"> | "(" Point "," Point "," Point "," Point ("," Point)* ")" }
 
-	point { NumericLiteral space NumericLiteral (space NumericLiteral)? }
+	Point { NumericLiteral space NumericLiteral (space NumericLiteral)? }
 }
 
 polygonText {  "(" linearRingText ("," linearRingText)* ")" }
