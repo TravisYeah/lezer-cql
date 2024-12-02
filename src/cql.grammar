@@ -28,9 +28,9 @@ comparisonPredicate {
 	IsNullPredicate
 }
 
-ArrayPredicate { arrayFunction "(" arrayOperand "," arrayOperand ")" }
+ArrayPredicate { arrayFunction "(" ArrayOperand "," ArrayOperand ")" }
 
-arrayOperand {
+ArrayOperand {
 	arrayExpression |
 	PropertyName |
 	Function

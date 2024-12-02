@@ -292,7 +292,7 @@ A_EQUALS(a, b)
 
 ==>
 
-BooleanExpression(ArrayPredicate("A_EQUALS", PropertyName(Identifier), PropertyName(Identifier)))
+BooleanExpression(ArrayPredicate("A_EQUALS", ArrayOperand(PropertyName(Identifier)), ArrayOperand(PropertyName(Identifier))))
 
 # grouped expression
 
